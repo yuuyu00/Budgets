@@ -1,0 +1,19 @@
+{
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "budgets-20190512144430-authRole",
+            "UnauthRoleArn": "arn:aws:iam::706386594667:role/budgets-20190512144430-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::706386594667:role/budgets-20190512144430-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "budgets-20190512144430-deployment",
+            "UnauthRoleName": "budgets-20190512144430-unauthRole",
+            "StackName": "budgets-20190512144430",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:706386594667:stack/budgets-20190512144430/033d13b0-7479-11e9-a8f1-0a56b21e2412"
+        },
+        "categories": {
+            "auth": {
+                "cognito2f0751af": {}
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "paths": [
+        {
+            "name": "/users",
+            "lambdaFunction": "budgets",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "budgets",
+    "apiName": "budgets",
+    "functionArns": [
+        {
+            "lambdaFunction": "budgets"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "budgets-20190512144430-authRole",
+        "unAuthRoleName": "budgets-20190512144430-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "budgets",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
