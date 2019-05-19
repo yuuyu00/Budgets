@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { API, Auth } from 'aws-amplify';
+import { connect } from 'react-redux';
+
+import { fetchUsers } from '../actions';
 
 interface Props {
-  content: string;
+  fetchUsers: Function;
 }
 
-const API_NAME = 'budgets';
+interface State {
+  users: Object[];
+}
 
-export default ({ content = 'default' }: Props) => {
-  const listUser = async () => {
-    const user = await Auth.currentAuthenticatedUser();
-    const myInit = {
-      headers: {
-        Authorization: user.signInUserSession.idToken.jwtToken,
-      },
-    };
-    const response = await API.get(API_NAME, '/users', myInit);
-    console.log('List user');
-    console.log(response);
-  };
-
+const Budgets = (props: Props) => {
   const createUser = async () => {
     const myInit = {
       body: {
@@ -29,14 +22,22 @@ export default ({ content = 'default' }: Props) => {
         balance: 2000,
       },
     };
-    const response = await API.post(API_NAME, '/users', myInit);
-    console.log('Create user');
-    console.log(response);
   };
 
-  useEffect(() => {
-    listUser();
-  }, []);
-
-  return <div>{content}</div>;
+  return (
+    <div>
+      <button onClick={() => props.fetchUsers()}>fetchUsers</button>
+    </div>
+  );
 };
+
+const mapStateToProps = (state: State) => {
+  return {
+    users: state.users,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchUsers },
+)(Budgets);

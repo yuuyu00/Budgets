@@ -9,7 +9,7 @@ const App = () => {
     <Root>
       <div className="App">
         <div>App</div>
-        <Budget content="aaaa" />
+        <Budget />
       </div>
     </Root>
   );
