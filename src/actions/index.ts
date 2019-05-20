@@ -35,22 +35,32 @@ export const deleteUser = (userId: String): UserActionTypes => {
   return { type: DELETE_USER, payload: { path: '/users', userId } };
 };
 
-export const fetchUsersSucceeded = (data: Object): UserSucceededActionTypes => {
-  return { type: FETCH_USERS_SUCCEEDED, payload: { data } };
+export const fetchUsersSucceeded = (
+  response: Object,
+): UserSucceededActionTypes => {
+  return { type: FETCH_USERS_SUCCEEDED, payload: { data: response } };
 };
 
-export const fetchUserSucceeded = (data: Object): UserSucceededActionTypes => {
-  return { type: FETCH_USER_SUCCEEDED, payload: { data } };
+export const fetchUserSucceeded = (
+  response: Object,
+): UserSucceededActionTypes => {
+  return { type: FETCH_USER_SUCCEEDED, payload: { data: response } };
 };
 
-export const createUserSucceeded = (data: Object): UserSucceededActionTypes => {
-  return { type: CREATE_USER_SUCCEEDED, payload: { data } };
+export const createUserSucceeded = (
+  response: Object,
+): UserSucceededActionTypes => {
+  return { type: CREATE_USER_SUCCEEDED, payload: { data: response } };
 };
 
-export const updateUserSucceeded = (data: Object): UserSucceededActionTypes => {
-  return { type: UPDATE_USER_SUCCEEDED, payload: { data } };
+export const updateUserSucceeded = (
+  response: Object,
+): UserSucceededActionTypes => {
+  return { type: UPDATE_USER_SUCCEEDED, payload: { data: response } };
 };
 
-export const deleteUserSucceeded = (data: Object): UserSucceededActionTypes => {
-  return { type: DELETE_USER_SUCCEEDED, payload: { data } };
+export const deleteUserSucceeded = (
+  response: Object,
+): UserSucceededActionTypes => {
+  return { type: DELETE_USER_SUCCEEDED, payload: { data: response } };
 };

@@ -59,10 +59,18 @@ const convertUrlType = (param, type) => {
  ********************************/
 
 app.get(path, function(req, res) {
+  console.log(req.apiGateway.event);
   const queryParams = {
     TableName: tableName,
+    KeyConditionExpression: '#id = :id',
+    ExpressionAttributeNames: {
+      '#id': 'id',
+    },
+    ExpressionAttributeValues: {
+      ':id': req.apiGateway.event.requestContext.authorizer.claims.sub,
+    },
   };
-  dynamodb.scan(queryParams, (err, data) => {
+  dynamodb.query(queryParams, (err, data) => {
     if (err) {
       res.json({ error: 'Could not load items: ' + err });
     } else {
@@ -195,14 +203,23 @@ app.post(path, function(req, res) {
 
   let putItemParams = {
     TableName: tableName,
-    Item: req.body,
+    Item: {
+      id: req.apiGateway.event.requestContext.authorizer.claims.sub,
+      created_at: new Date().toJSON(),
+      updated_at: new Date().toJSON(),
+      ...req.body,
+    },
   };
   dynamodb.put(putItemParams, (err, data) => {
     if (err) {
       res.statusCode = 500;
       res.json({ error: err, url: req.url, body: req.body });
     } else {
-      res.json({ success: 'post call succeed!', url: req.url, data: data });
+      res.json({
+        success: 'post call succeed!',
+        url: req.url,
+        data: data,
+      });
     }
   });
 });

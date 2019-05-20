@@ -30,6 +30,7 @@
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
+    "semantic-ui-react": "^0.87.1",
     "typescript": "3.4.5",
     "uuidv4": "^4.0.0"
   },
