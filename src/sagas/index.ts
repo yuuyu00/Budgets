@@ -70,7 +70,6 @@ export function* createUser(action: UserActionTypes) {
         ...action.payload.data,
       },
     };
-    console.log(myInit);
     const res = yield call(
       [API, API.post],
       API_NAME,
