@@ -1,13 +1,13 @@
 import { call, put, all, takeEvery } from 'redux-saga/effects';
 import { API, Auth, Hub } from 'aws-amplify';
 
+import awsconfig from '../aws-exports';
+
 import {
-  FETCH_USERS,
   FETCH_USER,
   CREATE_USER,
   UPDATE_USER,
   DELETE_USER,
-  FETCH_USERS_SUCCEEDED,
   FETCH_USER_SUCCEEDED,
   CREATE_USER_SUCCEEDED,
   UPDATE_USER_SUCCEEDED,
@@ -15,7 +15,6 @@ import {
   UserActionTypes,
 } from '../actions/types';
 import {
-  fetchUsersSucceeded,
   fetchUserSucceeded,
   createUserSucceeded,
   updateUserSucceeded,
@@ -23,8 +22,8 @@ import {
 } from '../actions';
 
 const API_NAME = 'budgets';
+API.configure(awsconfig);
 
-let headers: any;
 let user: any = null;
 
 interface MyInit {
@@ -53,13 +52,12 @@ const getHeaders = () => {
   };
 };
 
-export function* fetchUsers(action: UserActionTypes) {
+export function* fetchUser(action: UserActionTypes) {
   const myInit = {
     headers: getHeaders(),
   };
-  console.log(myInit);
   const res = yield call([API, API.get], API_NAME, action.payload.path, myInit);
-  yield put(fetchUsersSucceeded(res));
+  yield put(fetchUserSucceeded(res));
 }
 
 export function* createUser(action: UserActionTypes) {
@@ -76,12 +74,12 @@ export function* createUser(action: UserActionTypes) {
       action.payload.path,
       myInit,
     );
-    yield put(fetchUsersSucceeded(res));
+    yield put(fetchUserSucceeded(res));
   }
 }
 
-export function* handleFetchUsers() {
-  yield takeEvery(FETCH_USERS, fetchUsers);
+export function* handlefetchUser() {
+  yield takeEvery(FETCH_USER, fetchUser);
 }
 
 export function* handleCreateUsers() {
@@ -89,5 +87,5 @@ export function* handleCreateUsers() {
 }
 
 export default function* rootSaga() {
-  yield all([handleFetchUsers(), handleCreateUsers()]);
+  yield all([handlefetchUser(), handleCreateUsers()]);
 }

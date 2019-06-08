@@ -10,18 +10,14 @@ export const UPDATE_USER_SUCCEEDED = 'UPDATE_USER_SUCCEEDED';
 export const CREATE_USER_SUCCEEDED = 'CREATE_USER_SUCCEEDED';
 export const DELETE_USER_SUCCEEDED = 'DELETE_USER_SUCCEEDED';
 
-export interface Users {
+export interface User {
   id: String;
   name: String;
   income: Number;
   balance: Number;
-}
-
-export interface FetchUsers {
-  type: typeof FETCH_USERS;
-  payload: {
-    path: String;
-  };
+  created_at: Date | null;
+  updated_at: Date | null;
+  loading?: Boolean;
 }
 
 export interface FetchUser {
@@ -35,7 +31,7 @@ export interface CreateUser {
   type: typeof CREATE_USER;
   payload: {
     path: String;
-    data: Users;
+    data: User;
   };
 }
 
@@ -43,7 +39,7 @@ export interface UpdateUser {
   type: typeof UPDATE_USER;
   payload: {
     path: String;
-    data: Users;
+    data: User;
   };
 }
 
@@ -55,50 +51,37 @@ export interface DeleteUser {
   };
 }
 
-export type UserActionTypes =
-  | FetchUsers
-  | FetchUser
-  | CreateUser
-  | UpdateUser
-  | DeleteUser;
-
-export interface FetchUsersSucceeded {
-  type: typeof FETCH_USERS_SUCCEEDED;
-  payload: {
-    data: Object;
-  };
-}
+export type UserActionTypes = FetchUser | CreateUser | UpdateUser | DeleteUser;
 
 export interface FetchUserSucceeded {
   type: typeof FETCH_USER_SUCCEEDED;
   payload: {
-    data: Object;
+    data: any;
   };
 }
 
 export interface CreateUserSucceeded {
   type: typeof CREATE_USER_SUCCEEDED;
   payload: {
-    data: Object;
+    data: any;
   };
 }
 
 export interface UpdateUserSucceeded {
   type: typeof UPDATE_USER_SUCCEEDED;
   payload: {
-    data: Object;
+    data: any;
   };
 }
 
 export interface DeleteUserSucceeded {
   type: typeof DELETE_USER_SUCCEEDED;
   payload: {
-    data: Object;
+    data: any;
   };
 }
 
 export type UserSucceededActionTypes =
-  | FetchUsersSucceeded
   | FetchUserSucceeded
   | CreateUserSucceeded
   | UpdateUserSucceeded

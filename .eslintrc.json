@@ -20,7 +20,9 @@
     "object-curly-newline": 0,
     "import/named": 0,
     "radix": 0,
-    "@typescript-eslint/indent": 0
+    "@typescript-eslint/indent": 0,
+    "no-undef": 0,
+    "import/no-extraneous-dependencies": 0
   },
   "globals": {
     "window": false,
