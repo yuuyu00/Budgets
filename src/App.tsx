@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Auth, Hub } from 'aws-amplify';
-import { Route, Router, Switch } from 'react-router-dom';
 import { withAuthenticator } from 'aws-amplify-react';
-import { Menu, Icon, Button } from 'semantic-ui-react';
+import { Route, Router, Switch } from 'react-router-dom';
+import { Menu, Button } from 'semantic-ui-react';
 
 import history from './history';
 import Budget from './components/Budget';
@@ -44,7 +44,6 @@ const App = () => {
     return (
       <Menu fixed="top" borderless style={{ backgroundColor: '#00b5ad' }}>
         <Menu.Item onClick={() => history.push('/')}>
-          <Icon name="checkmark" size="large" style={{ color: 'white' }} />
           <span style={{ fontSize: '18px', color: 'white' }}>Todo</span>
         </Menu.Item>
         <Menu.Item position="right" style={{ paddingRight: '10%' }} />
@@ -77,5 +76,5 @@ const App = () => {
   }
 };
 
-export default App;
-// export default withAuthenticator(App, { includeGreetings: true });
+// export default App;
+export default withAuthenticator(App, { includeGreetings: true });

@@ -1,83 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import { API, Auth } from 'aws-amplify';
 import { connect } from 'react-redux';
-import uuid from 'uuidv4';
+import { Loader } from 'semantic-ui-react';
 
-import { fetchUsers, createUser } from '../actions';
+import { fetchUser, createUser } from '../actions';
+import CreateUserWizard from './CreateUserWizard';
+import { User } from '../actions/types';
 
 interface Props {
-  fetchUsers: Function;
+  fetchUser: Function;
   createUser: Function;
+  user: User;
+  store?: Object;
 }
 
 interface State {
-  users: Object[];
+  user: User;
 }
 
 const Budgets = (props: Props) => {
-  const [createUserName, setCreateUserName] = useState('');
-  const [createUserIncome, setCreateUserIncome] = useState(0);
-  const [createUserBalance, setCreateUserBalance] = useState(0);
+  useEffect(() => {
+    console.log(props.user);
+  }, [props.user]);
 
-  const createUser = async () => {
-    const myInit = {
-      body: {
-        id: 'askdfjnkau',
-        name: 'chihiro',
-        income: 100000,
-        balance: 2000,
-      },
-    };
-  };
+  useEffect(() => {
+    (async () => {
+      await props.fetchUser();
+    })();
+  }, []);
 
-  const renderCreateUser = () => {
+  const renderUserData = (userData: User) => {
     return (
       <div>
-        <input
-          type="text"
-          value={createUserName}
-          onChange={e => setCreateUserName(e.target.value)}
-        />
-        <input
-          type="text"
-          value={createUserIncome}
-          onChange={e => setCreateUserIncome(parseInt(e.target.value))}
-        />
-        <input
-          type="text"
-          value={createUserBalance}
-          onChange={e => setCreateUserBalance(parseInt(e.target.value))}
-        />
-        <button
-          onClick={() =>
-            props.createUser({
-              name: createUserName,
-              income: createUserIncome,
-              balance: createUserBalance,
-            })
-          }
-        >
-          CreateUser
-        </button>
+        <div id="user_id">{userData.id}</div>
+        <div id="user_name">{userData.name}</div>
+        <div id="user_income">{userData.income}</div>
+        <div id="user_balance">{userData.balance}</div>
       </div>
     );
   };
 
-  return (
-    <div>
-      <button onClick={() => props.fetchUsers()}>fetchUsers</button>
-      {renderCreateUser()}
-    </div>
-  );
+  const renderCreateUserWizard = () => {
+    return <CreateUserWizard />;
+  };
+
+  if (props.user.loading) return <Loader active>Loading...</Loader>;
+  if ('name' in props.user) {
+    return <>{renderUserData(props.user)}</>;
+  } else {
+    return <>{renderCreateUserWizard()}</>;
+  }
 };
 
 const mapStateToProps = (state: State) => {
   return {
-    users: state.users,
+    user: state.user,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchUsers, createUser },
+  { fetchUser, createUser },
 )(Budgets);
