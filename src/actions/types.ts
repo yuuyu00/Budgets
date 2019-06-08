@@ -11,10 +11,10 @@ export const CREATE_USER_SUCCEEDED = 'CREATE_USER_SUCCEEDED';
 export const DELETE_USER_SUCCEEDED = 'DELETE_USER_SUCCEEDED';
 
 export interface User {
-  id: String;
-  name: String;
-  income: Number;
-  balance: Number;
+  id: string;
+  name: string;
+  income: number;
+  balance: number;
   created_at: Date | null;
   updated_at: Date | null;
   loading?: Boolean;
@@ -23,14 +23,14 @@ export interface User {
 export interface FetchUser {
   type: typeof FETCH_USER;
   payload: {
-    path: String;
+    path: string;
   };
 }
 
 export interface CreateUser {
   type: typeof CREATE_USER;
   payload: {
-    path: String;
+    path: string;
     data: User;
   };
 }
@@ -38,7 +38,7 @@ export interface CreateUser {
 export interface UpdateUser {
   type: typeof UPDATE_USER;
   payload: {
-    path: String;
+    path: string;
     data: User;
   };
 }
@@ -46,8 +46,8 @@ export interface UpdateUser {
 export interface DeleteUser {
   type: typeof DELETE_USER;
   payload: {
-    path: String;
-    userId: String;
+    path: string;
+    userId: string;
   };
 }
 

@@ -1,4 +1,3 @@
-import history from '../history';
 import {
   FETCH_USER,
   CREATE_USER,
@@ -25,7 +24,7 @@ export const updateUser = (data: User): UserActionTypes => {
   return { type: UPDATE_USER, payload: { path: '/users', data } };
 };
 
-export const deleteUser = (userId: String): UserActionTypes => {
+export const deleteUser = (userId: string): UserActionTypes => {
   return { type: DELETE_USER, payload: { path: '/users', userId } };
 };
 
