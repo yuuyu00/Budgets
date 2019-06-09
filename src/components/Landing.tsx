@@ -8,11 +8,9 @@ import history from '../history';
 export default () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const signUpAndSignIn = async () => {
+  const signUpAndSignIn = async (email: string, password: string) => {
     setIsLoading(true);
 
-    const email = `${uuid()}@${uuid()}.com`;
-    const password = uuid();
     await Auth.signUp({
       username: email,
       password,
@@ -29,8 +27,9 @@ export default () => {
         size="large"
         style={{ marginTop: '20px' }}
         color="teal"
-        onClick={signUpAndSignIn}
+        onClick={() => signUpAndSignIn(`${uuid()}@${uuid()}.com`, uuid())}
         loading={isLoading}
+        id="quick_signup_button"
       >
         ログインせずに始める
       </Button>
@@ -39,6 +38,7 @@ export default () => {
         style={{ marginTop: '20px' }}
         color="grey"
         onClick={() => history.push('/signup')}
+        id="signup_button"
       >
         サインアップ
       </Button>
