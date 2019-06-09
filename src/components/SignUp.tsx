@@ -72,6 +72,8 @@ export default () => {
             <Form.Input
               onChange={e => setEmail(e.target.value)}
               placeholder="youremailaddress@example.com"
+              value={email}
+              id="email_input"
             />
             <Message
               error
@@ -90,6 +92,8 @@ export default () => {
               onChange={e => setPassword(e.target.value)}
               type="password"
               placeholder="8文字以上"
+              value={password}
+              id="password_input"
             />
             <Message
               error

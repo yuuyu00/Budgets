@@ -17,7 +17,5 @@ export default (state: User | {} = {}, action: UserSucceededActionTypes) => {
       return { ...action.payload.data[0], loading: false };
     case DELETE_USER_SUCCEEDED:
       return state;
-    default:
-      return { loading: true };
   }
 };

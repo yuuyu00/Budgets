@@ -23,7 +23,10 @@ describe('userReducer', () => {
       type: FETCH_USER_SUCCEEDED,
       payload: { data: [userArg] },
     };
-    expect(userReducer({}, action)).toEqual({ ...userArg, loading: false });
+    expect(userReducer(undefined, action)).toEqual({
+      ...userArg,
+      loading: false,
+    });
   });
 
   it('CREATE_USER_SUCCEEDED', () => {
@@ -31,7 +34,10 @@ describe('userReducer', () => {
       type: CREATE_USER_SUCCEEDED,
       payload: { data: [userArg] },
     };
-    expect(userReducer({}, action)).toEqual({ ...userArg, loading: false });
+    expect(userReducer(undefined, action)).toEqual({
+      ...userArg,
+      loading: false,
+    });
   });
 
   it('UPDATE_USER_SUCCEEDED', () => {
@@ -39,7 +45,10 @@ describe('userReducer', () => {
       type: UPDATE_USER_SUCCEEDED,
       payload: { data: [userArg] },
     };
-    expect(userReducer({}, action)).toEqual({ ...userArg, loading: false });
+    expect(userReducer(userArg, action)).toEqual({
+      ...userArg,
+      loading: false,
+    });
   });
 
   it('DELETE_USER_SUCCEEDED', () => {

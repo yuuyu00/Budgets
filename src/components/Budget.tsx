@@ -19,10 +19,6 @@ interface State {
 
 const Budgets = (props: Props) => {
   useEffect(() => {
-    console.log(props.user);
-  }, [props.user]);
-
-  useEffect(() => {
     (async () => {
       await props.fetchUser();
     })();

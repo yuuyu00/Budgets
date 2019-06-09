@@ -57,10 +57,12 @@ export default () => {
             サインイン
           </Header>
           <Form.Field required>
-            <label>ユーザー名</label>
+            <label>メールアドレス</label>
             <Form.Input
+              id="email_input"
               onChange={e => setUsername(e.target.value)}
-              placeholder="ユーザー名"
+              placeholder="address@example.com"
+              value={username}
             />
             <Message
               error
@@ -71,8 +73,10 @@ export default () => {
           <Form.Field required>
             <label>パスワード</label>
             <Form.Input
+              id="password_input"
               onChange={e => setPassword(e.target.value)}
               type="password"
+              value={password}
             />
             <Message
               error
