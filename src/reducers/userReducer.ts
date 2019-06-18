@@ -7,7 +7,10 @@ import {
   User,
 } from '../actions/types';
 
-export default (state: User | {} = {}, action: UserSucceededActionTypes) => {
+export default (
+  state: User | {} = { loading: true },
+  action: UserSucceededActionTypes,
+) => {
   switch (action.type) {
     case FETCH_USER_SUCCEEDED:
       return { ...action.payload.data[0], loading: false };
@@ -16,6 +19,8 @@ export default (state: User | {} = {}, action: UserSucceededActionTypes) => {
     case UPDATE_USER_SUCCEEDED:
       return { ...action.payload.data[0], loading: false };
     case DELETE_USER_SUCCEEDED:
+      return state;
+    default:
       return state;
   }
 };

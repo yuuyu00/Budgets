@@ -1,11 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-export const createWrapper = (Component: any, initialState: Object) => {
-  const store = createStore(() => initialState);
-  return shallow(<Component store={store} />);
+export const useCreateWrapper = (Component: React.FC) => (
+  initialValue: object = {},
+) => {
+  const store = createStore(() => initialValue);
+  return mount(
+    <Provider store={store}>
+      <Component />
+    </Provider>,
+  );
 };
-
-export const wrapperFactory = (Component: any) => (initialState: Object = {}) =>
-  createWrapper(Component, initialState);

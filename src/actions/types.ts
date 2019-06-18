@@ -20,6 +20,27 @@ export interface User {
   loading?: Boolean;
 }
 
+interface Category {
+  id: string;
+  name: string;
+  reserved: number;
+  spent: number;
+  due?: Date;
+  loading?: Boolean;
+}
+
+interface Setup {
+  name: string;
+  income: number;
+  balance: number;
+  categories: Category[];
+}
+
+export interface State {
+  user: User;
+}
+export interface FetchItems {}
+
 export interface FetchUser {
   type: typeof FETCH_USER;
   payload: {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Loader } from 'semantic-ui-react';
 
-import { fetchUser, createUser } from '../actions';
-import CreateUserWizard from './CreateUserWizard';
+import { fetchUser } from '../actions';
 import { User } from '../actions/types';
+import history from '../history';
 
 interface Props {
   fetchUser: Function;
@@ -17,12 +17,21 @@ interface State {
   user: User;
 }
 
-const Budgets = (props: Props) => {
+export default () => {
+  const dispatch = useDispatch();
+  const user: User = useSelector((state: State) => state.user);
+
+  // ユーザーデータをフェッチ
   useEffect(() => {
-    (async () => {
-      await props.fetchUser();
-    })();
+    dispatch(fetchUser());
   }, []);
+
+  // ユーザデータが存在しなければ初期設定コンポーネントに移動
+  useEffect(() => {
+    if (!user.loading && !('name' in user)) {
+      history.push('/setup');
+    }
+  }, [user]);
 
   const renderUserData = (userData: User) => {
     return (
@@ -35,25 +44,6 @@ const Budgets = (props: Props) => {
     );
   };
 
-  const renderCreateUserWizard = () => {
-    return <CreateUserWizard />;
-  };
-
-  if (props.user.loading) return <Loader active>Loading...</Loader>;
-  if ('name' in props.user) {
-    return <>{renderUserData(props.user)}</>;
-  } else {
-    return <>{renderCreateUserWizard()}</>;
-  }
+  if (user.loading) return <Loader active>Loading...</Loader>;
+  return <>{renderUserData(user)}</>;
 };
-
-const mapStateToProps = (state: State) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  { fetchUser, createUser },
-)(Budgets);

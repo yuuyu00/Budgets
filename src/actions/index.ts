@@ -51,3 +51,7 @@ export const deleteUserSucceeded = (
 ): UserSucceededActionTypes => {
   return { type: DELETE_USER_SUCCEEDED, payload: { data: response } };
 };
+
+export const fetchItems = () => {
+  return null;
+};

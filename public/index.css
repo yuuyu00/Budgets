@@ -1,0 +1,25 @@
+body {
+  touch-action: manipulation;
+}
+
+input {
+  font-size: 16px !important;
+}
+
+#root {
+  height: 100vh;
+  padding-top: 70px;
+  width: 100vw !important;
+}
+
+#setup_user_segment {
+  height: 80vh;
+}
+
+.setup-form {
+  padding-top: 5vh;
+}
+
+#setup_button {
+  margin-top: 15px;
+}
