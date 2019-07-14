@@ -25,7 +25,12 @@
     "import/no-extraneous-dependencies": 0,
     "@typescript-eslint/no-unused-vars": 1,
     "default-case": 0,
-    "consistent-return": 0
+    "consistent-return": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/label-has-for": 0,
+    "operator-linebreak": 0,
+    "no-unused-expressions": 0,
+    "react/jsx-one-expression-per-line": 0
   },
   "globals": {
     "window": false,

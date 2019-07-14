@@ -6,14 +6,35 @@ input {
   font-size: 16px !important;
 }
 
-#root {
-  height: 100vh;
-  padding-top: 70px;
-  width: 100vw !important;
+#setup_user_segment {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 500px) {
+  #root {
+    height: 80vh;
+    padding-top: 70px;
+    width: 100vw !important;
+  }
+
+  #setup_user_segment {
+    min-height: calc(80vh - 70px);
+    max-width: 90vw;
+  }
 }
 
-#setup_user_segment {
-  height: 80vh;
+@media screen and (min-width: 501px) {
+  #root {
+    height: 100vh;
+    padding-top: 70px;
+    width: 100vw !important;
+  }
+
+  #setup_user_segment {
+    min-height: 85vh;
+    max-width: 50vw;
+  }
 }
 
 .setup-form {
@@ -21,5 +42,18 @@ input {
 }
 
 #setup_button {
+  height: 50px;
   margin-top: 15px;
+}
+
+.confirmation-item {
+  margin-bottom: 10px;
+}
+
+.fas {
+  font-size: 30px;
+}
+
+.category-input {
+  margin-bottom: 50px;
 }

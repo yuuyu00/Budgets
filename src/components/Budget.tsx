@@ -40,6 +40,8 @@ export default () => {
         <div id="user_name">{userData.name}</div>
         <div id="user_income">{userData.income}</div>
         <div id="user_balance">{userData.balance}</div>
+        <div>{userData.created_at}</div>
+        <div>{userData.updated_at}</div>
       </div>
     );
   };

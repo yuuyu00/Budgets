@@ -15,21 +15,24 @@ export interface User {
   name: string;
   income: number;
   balance: number;
-  created_at: Date | null;
-  updated_at: Date | null;
+  created_at: Date;
+  updated_at: Date;
   loading?: Boolean;
 }
 
-interface Category {
+export interface Category {
   id: string;
+  owner: string;
   name: string;
   reserved: number;
   spent: number;
   due?: Date;
+  created_at?: Date;
+  updated_at?: Date;
   loading?: Boolean;
 }
 
-interface Setup {
+export interface Setup {
   name: string;
   income: number;
   balance: number;
