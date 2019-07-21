@@ -1,18 +1,16 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
-import { createStore } from 'redux';
+import { ReactWrapper } from 'enzyme';
 import { Loader } from 'semantic-ui-react';
 
+import { useCreateWrapper } from '../../utils/testUtils';
 import CreateUserWizard from '../CreateUserWizard';
+
+const createWrapper = useCreateWrapper(CreateUserWizard);
 
 describe('<CreateUserWizard />', () => {
   describe('', () => {
-    let wrapper: ShallowWrapper;
+    let wrapper: ReactWrapper;
     beforeEach(() => {
-      const store = createStore(() => ({}));
-      wrapper = shallow(<CreateUserWizard store={store} />)
-        .dive()
-        .dive();
+      wrapper = createWrapper({});
     });
 
     it('正常にレンダリングされる', () => {

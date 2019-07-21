@@ -14,11 +14,34 @@ export interface User {
   id: string;
   name: string;
   income: number;
-  balance: number;
-  created_at: Date | null;
-  updated_at: Date | null;
+  created_at: string;
+  updated_at: string;
   loading?: Boolean;
 }
+
+export interface Category {
+  id: string;
+  owner: string;
+  name: string;
+  reserved: number;
+  spent: number;
+  due?: Date;
+  created_at?: Date;
+  updated_at?: Date;
+  loading?: Boolean;
+}
+
+export interface Setup {
+  name: string;
+  income: number;
+  balance: number;
+  categories: Category[];
+}
+
+export interface State {
+  user: User;
+}
+export interface FetchItems {}
 
 export interface FetchUser {
   type: typeof FETCH_USER;

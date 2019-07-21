@@ -1,24 +1,17 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
 import { Loader } from 'semantic-ui-react';
-import { createStore } from 'redux';
 
+import history from '../../history';
 import Budgets from '../Budget';
-import CreateUserWizard from '../CreateUserWizard';
+import { useCreateWrapper } from '../../utils/testUtils';
 
-// const createWrapper = (initialState: Object = {}) => {
-//   const store = createStore(() => initialState);
-//   return shallow(<Budgets store={store} />);
-// };
+const createWrapper = useCreateWrapper(Budgets);
 
 describe('<Budgets />', () => {
   describe('ユーザデータがフェッチされない間', () => {
-    let wrapper: ShallowWrapper;
+    let wrapper: ReactWrapper;
     beforeEach(() => {
-      const store = createStore(() => ({ user: { loading: true } }));
-      wrapper = shallow(<Budgets store={store} />)
-        .dive()
-        .dive();
+      wrapper = createWrapper({ user: { loading: true } });
     });
 
     it('ユーザデータがフェッチされない間Loaderが表示される', () => {
@@ -27,19 +20,16 @@ describe('<Budgets />', () => {
   });
 
   describe('ユーザデータが存在する場合', () => {
-    let wrapper: ShallowWrapper;
+    let wrapper: ReactWrapper;
     beforeEach(() => {
-      const store = createStore(() => ({
+      wrapper = createWrapper({
         user: {
           id: 'userdata_test_id',
           name: 'Tony Stark',
           income: 300000,
           balance: 240000,
         },
-      }));
-      wrapper = shallow(<Budgets store={store} />)
-        .dive()
-        .dive();
+      });
     });
 
     it('正常にレンダリングされる', () => {
@@ -55,20 +45,19 @@ describe('<Budgets />', () => {
   });
 
   describe('ユーザデータが存在しない場合', () => {
-    let wrapper: ShallowWrapper;
+    let wrapper: ReactWrapper;
+    const historySpy = jest.spyOn(history, 'push');
+
     beforeEach(() => {
-      const store = createStore(() => ({ user: {} }));
-      wrapper = shallow(<Budgets store={store} />)
-        .dive()
-        .dive();
+      wrapper = createWrapper({ user: { loading: false } });
     });
 
     it('正常にレンダリングされる', () => {
       expect(wrapper).toBeTruthy();
     });
 
-    it('ユーザデータ作成コンポーネントが表示される', () => {
-      expect(wrapper.find(CreateUserWizard)).toHaveLength(1);
+    it('/setupに移動する', () => {
+      expect(historySpy).toBeCalledWith('/setup');
     });
   });
 });
