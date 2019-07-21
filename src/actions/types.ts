@@ -14,9 +14,8 @@ export interface User {
   id: string;
   name: string;
   income: number;
-  balance: number;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   loading?: Boolean;
 }
 

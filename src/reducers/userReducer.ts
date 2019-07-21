@@ -6,6 +6,7 @@ import {
   UserSucceededActionTypes,
   User,
 } from '../actions/types';
+import history from '../history';
 
 export default (
   state: User | {} = { loading: true },
@@ -15,6 +16,7 @@ export default (
     case FETCH_USER_SUCCEEDED:
       return { ...action.payload.data[0], loading: false };
     case CREATE_USER_SUCCEEDED:
+      console.log('Create user succeeded');
       return { ...action.payload.data[0], loading: false };
     case UPDATE_USER_SUCCEEDED:
       return { ...action.payload.data[0], loading: false };

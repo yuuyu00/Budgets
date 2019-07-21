@@ -2,6 +2,7 @@ import { call, put, all, takeEvery } from 'redux-saga/effects';
 import { API, Auth, Hub } from 'aws-amplify';
 
 import awsconfig from '../aws-exports';
+import history from '../history';
 
 import {
   FETCH_USER,
@@ -74,7 +75,9 @@ export function* createUser(action: UserActionTypes) {
       action.payload.path,
       myInit,
     );
-    yield put(fetchUserSucceeded(res));
+
+    history.push('/');
+    yield put(createUserSucceeded(res));
   }
 }
 

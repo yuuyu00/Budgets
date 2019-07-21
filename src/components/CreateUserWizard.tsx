@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Form,
   Button,
@@ -23,6 +23,7 @@ export default () => {
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const user: Types.User = useSelector((state: Types.State) => state.user);
 
   const NAME_PAGE_NO = 0;
   const INCOME_PAGE_NO = 1;
@@ -39,7 +40,7 @@ export default () => {
   const [income, setIncome] = useState(0);
   const [categories, setCategories]: [Types.Category[], Function] = useState([
     {
-      id: uuid(),
+      id: user.id,
       owner: '',
       name: '',
       reserved: 0,
@@ -51,11 +52,14 @@ export default () => {
    * ユーザデータの初期登録を行います。
    * @param userInfo 登録するユーザデータ
    */
-  const handleCreateUser = (userInfo?: Types.User) => {
+  const handleCreateUser = async () => {
+    const registeringUserData: any = {
+      name,
+      income,
+    };
     setIsLoading(true);
-    console.log('handleCreateUser called');
-    console.log(userInfo);
-    // dispatch(createUser(userInfo));
+    console.log(registeringUserData);
+    const res = await dispatch(createUser(registeringUserData));
   };
 
   /**
